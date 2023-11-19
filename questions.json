@@ -1,0 +1,29 @@
+[
+  {
+    "frage": "Wie ist das Idealmass eines (neuen) Spielfeldes?",
+    "antworten": [
+      "120 m x 90 m",
+      "100 m x 64 m",
+      "90 m x 45 m"
+    ],
+    "loesung": "b"
+  },
+  {
+    "frage": "Der Netzraum gehört...",
+    "antworten": [
+      "nicht zum Spielfeld.",
+      "auch zum Spielfeld.",
+      "zum Torraum und somit zum Spielfeld. "
+    ],
+    "loesung": "a"
+  },
+  {
+    "frage": "Der Abstand der Torraumlinie zum Torpfosten beträgt...",
+    "antworten": [
+      "5,5 m",
+      "5 m",
+      "9,15 m"
+    ],
+    "loesung": "a"
+  }
+]
