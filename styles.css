@@ -34,3 +34,7 @@
   display: block;
   margin-top: 10px;
 }
+
+#next-question {
+  display: none; /* Hide the button by default */
+}

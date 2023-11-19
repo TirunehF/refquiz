@@ -1,14 +1,5 @@
 [
   {
-    "frage": "Frage",
-    "antworten": [
-      "Antwort1",
-      "Antwort2",
-      "Antwort3"
-    ],
-    "loesung": "lösung"
-  },
-  {
     "frage": "Wie ist das Idealmass eines (neuen) Spielfeldes?",
     "antworten": [
       "120 m x 90 m",
