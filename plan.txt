@@ -1,0 +1,12 @@
+-Layout clean
+    Title
+    question ID
+    full screen green/red? more strong feedback
+    previous question
+    dark mode
+    big buttons
+    
+-features
+    -random questions
+    -save questions that were wrong
+    -repeat wrong questinos more often

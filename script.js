@@ -1,15 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
   let questions = [];
   let currentQuestionIndex = -1;
-  
   function loadQuestions() {
     fetch('questions.json') // Adjust this URL to where your file is hosted
       .then(response => response.json())
       .then(loadedQuestions => {
-        questions = loadedQuestions;
+        questions = shuffleQuestions(loadedQuestions);
         displayQuestion(); // Display the first question after loading them
       })
       .catch(error => console.error('Error loading questions:', error));
+  }
+  
+  function shuffleQuestions(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
   
   function displayQuestion() {
