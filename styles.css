@@ -1,3 +1,4 @@
+/* Light Mode (Default) Styles */
 .quiz-container {
   margin: 20px;
   padding: 20px;
@@ -30,11 +31,43 @@
   background-color: #ffcccb; /* Light red */
 }
 
-.confirm-answer, .next-question, .save-question {
+.confirm-answer, .next-question, .prev-question, .save-question {
   display: block;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 #next-question {
   display: none; /* Hide the button by default */
+}
+#prev-question {
+  display: none; /* Hide the button by default */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #121212; /* Dark background */
+  color: #ffffff; /* Light text */
+}
+
+body.dark-mode .quiz-container {
+  border-color: #444444;
+}
+
+body.dark-mode #options .answer-button {
+  background-color: #333333;
+  border-color: #555555;
+  color: #ffffff;
+}
+
+/* Maintain the same colors for selected, correct, and incorrect answers in both modes */
+body.dark-mode #options .answer-button.selected {
+  background-color: #69848d; /* Same light blue for selected answers */
+}
+
+body.dark-mode #options .answer-button.correct {
+  background-color: #64ee64; /* Same light green for correct answers */
+}
+
+body.dark-mode #options .answer-button.incorrect {
+  background-color: #f76260; /* Same light red for incorrect answers */
 }
