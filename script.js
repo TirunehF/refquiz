@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.classList.add('selected');
     });
   });
-  
+
   document.body.classList.add('dark-mode');
 
   // Theme toggle button
@@ -98,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Change the icon based on the mode
     if (document.body.classList.contains('dark-mode')) {
-      themeToggleIcon.textContent = '🌜'; // Moon icon for dark mode
+      themeToggleIcon.textContent = '🌞'; // Moon icon for dark mode
     } else {
-      themeToggleIcon.textContent = '🌞'; // Sun icon for light mode
+      themeToggleIcon.textContent = '🌜'; // Sun icon for light mode
     }
   });
 
