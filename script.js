@@ -84,10 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
       this.classList.add('selected');
     });
   });
+  
+  document.body.classList.add('dark-mode');
 
   // Theme toggle button
   const themeToggleButton = document.getElementById('theme-toggle');
   const themeToggleIcon = document.getElementById('theme-toggle-icon');
+
+  themeToggleIcon.textContent = '🌞'; // Sun icon for light mode
 
   themeToggleButton.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
