@@ -16,3 +16,7 @@
 Next:
 - 2 wrongs + 1 right
 - previous question see all colours, as was left
+- button interface
+top right night or day
+prev confirm next 
+save star

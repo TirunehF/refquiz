@@ -31,16 +31,16 @@
   background-color: #ffcccb; /* Light red */
 }
 
+/* Button Styling */
 .confirm-answer, .next-question, .prev-question, .save-question {
-  display: block;
-  margin-top: 30px;
+  display: inline-block; /* Display buttons in a row */
+  padding: 15px 30px; /* Larger padding for bigger buttons */
+  font-size: 1.2em; /* Larger font size */
+  margin: 5px; /* Margin between buttons */
 }
 
-#next-question {
-  display: none; /* Hide the button by default */
-}
-#prev-question {
-  display: none; /* Hide the button by default */
+#next-question, #prev-question {
+  display: none; /* Hide the buttons by default */
 }
 
 /* Dark Mode Styles */
@@ -70,4 +70,24 @@ body.dark-mode #options .answer-button.correct {
 
 body.dark-mode #options .answer-button.incorrect {
   background-color: #f76260; /* Same light red for incorrect answers */
+}
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+  .bottom-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around; /* Distribute buttons evenly */
+    background: #f7f7f7; /* Background color for the button container */
+    padding: 10px 0; /* Padding for the container */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Optional: adds a shadow for an elevated effect */
+  }
+
+  .confirm-answer, .next-question, .prev-question, .save-question {
+    flex-grow: 1; /* Each button will take equal space */
+    margin: 0 5px; /* Spacing between buttons */
+  }
 }
