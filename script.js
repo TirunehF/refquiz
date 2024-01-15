@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displayQuestion() {
     const question = questions[currentQuestionIndex];
-    document.getElementById('question-text').textContent = question.frage;
+    document.getElementById('question-text').textContent = `${question.index}. ${question.frage}`;
     const buttons = document.querySelectorAll('.answer-button');
 
     buttons.forEach((button, index) => {
