@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   let questions = [];
-  let currentQuestionIndex = -1;
-  let userAnswers = []; // Array to store user answers
+  let currentQuestionIndex = 0;
+  let userAttempts = []; // Array to store user attempts for each question
+  let stats = { shown: 0, correct: 0, wrong: 0 }; // Object to keep track of statistics
 
   function loadQuestions() {
     fetch('questions.json') // Adjust this URL to where your file is hosted
       .then(response => response.json())
       .then(loadedQuestions => {
         questions = shuffleQuestions(loadedQuestions);
-        userAnswers = new Array(questions.length).fill(null); // Initialize user answers array
+        userAttempts = new Array(questions.length).fill({ attempts: 0, selected: [] });
         displayQuestion(); // Display the first question after loading them
       })
       .catch(error => console.error('Error loading questions:', error));
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayQuestion() {
-    currentQuestionIndex = Math.max(0, Math.min(currentQuestionIndex, questions.length - 1));
     const question = questions[currentQuestionIndex];
     document.getElementById('question-text').textContent = question.frage;
     const buttons = document.querySelectorAll('.answer-button');
@@ -34,20 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
       button.style.display = 'block';
 
       button.classList.remove('selected', 'correct', 'incorrect');
-      if (userAnswers[currentQuestionIndex] === index) {
-        button.classList.add('selected');
+      if (userAttempts[currentQuestionIndex].selected.includes(index)) {
+        button.classList.add('incorrect');
       }
     });
 
-    // Update the visibility of the navigation buttons
     document.getElementById('prev-question').style.display = currentQuestionIndex > 0 ? 'block' : 'none';
-    document.getElementById('next-question').style.display = 'none'; // Hide until confirmed
-    document.getElementById('confirm-answer').style.display = userAnswers[currentQuestionIndex] === null ? 'block' : 'none';
+    document.getElementById('next-question').style.display = 'none';
+    document.getElementById('confirm-answer').style.display = userAttempts[currentQuestionIndex].attempts < 2 ? 'block' : 'none';
+
+    // Update statistics for questions shown
+    stats.shown++;
+    document.getElementById('stat-questions-shown').textContent = stats.shown;
   }
 
   function resetAnswerButtons() {
     document.querySelectorAll('.answer-button').forEach(button => {
-      button.classList.remove('selected', 'correct', 'incorrect');
+      button.classList.remove('selected');
     });
   }
 
@@ -64,16 +67,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('confirm-answer').addEventListener('click', () => {
+    const userAttempt = userAttempts[currentQuestionIndex];
     document.querySelectorAll('.answer-button').forEach((button, index) => {
       if (button.classList.contains('selected')) {
-        userAnswers[currentQuestionIndex] = index;
+        if (!userAttempt.selected.includes(index)) {
+          userAttempt.selected.push(index);
+        }
+        userAttempt.attempts++;
+
         if (button.dataset.correct === 'true') {
           button.classList.add('correct');
+          stats.correct++; // Increment correct answers
+          document.getElementById('stat-correct-answers').textContent = stats.correct;
+          document.getElementById('next-question').style.display = 'block';
+          document.getElementById('confirm-answer').style.display = 'none';
         } else {
           button.classList.add('incorrect');
+          if (userAttempt.attempts === 2) {
+            stats.wrong++; // Increment wrong answers
+            document.getElementById('stat-wrong-answers').textContent = stats.wrong;
+            document.querySelectorAll('.answer-button').forEach((btn, idx) => {
+              if (btn.dataset.correct === 'true') {
+                btn.classList.add('correct');
+              }
+            });
+            document.getElementById('next-question').style.display = 'block';
+            document.getElementById('confirm-answer').style.display = 'none';
+          }
         }
-        document.getElementById('next-question').style.display = 'block';
-        document.getElementById('confirm-answer').style.display = 'none';
       }
     });
   });
@@ -85,12 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.body.classList.add('dark-mode');
-
   // Theme toggle button
   const themeToggleButton = document.getElementById('theme-toggle');
   const themeToggleIcon = document.getElementById('theme-toggle-icon');
-
+  document.body.classList.add('dark-mode');
   themeToggleIcon.textContent = '🌞'; // Sun icon for light mode
 
   themeToggleButton.addEventListener('click', () => {
@@ -98,9 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Change the icon based on the mode
     if (document.body.classList.contains('dark-mode')) {
-      themeToggleIcon.textContent = '🌞'; // Moon icon for dark mode
+      themeToggleIcon.textContent = '🌜'; // Moon icon for dark mode
     } else {
-      themeToggleIcon.textContent = '🌜'; // Sun icon for light mode
+      themeToggleIcon.textContent = '🌞'; // Sun icon for light mode
     }
   });
 

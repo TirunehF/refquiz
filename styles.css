@@ -72,6 +72,11 @@ body.dark-mode #options .answer-button.incorrect {
   background-color: #f76260; /* Same light red for incorrect answers */
 }
 
+.statistics {
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* Responsive Styles for Mobile Devices */
 @media (max-width: 768px) {
   .bottom-buttons {
